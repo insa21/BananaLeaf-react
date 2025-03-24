@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
-
-  const isActive = (path) => location.pathname === path;
+  // We'll remove this line since we're using the isActive from NavLink's render props
+  // const location = useLocation();
 
   return (
     <nav className="bg-white/95 backdrop-blur-sm shadow-sm fixed w-full z-50">
@@ -14,11 +13,13 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <NavLink to="/" className="flex items-center space-x-2">
-              <img 
-                src="https://img.icons8.com/fluency/96/banana.png" 
-                alt="Logo" 
-                className="w-10 h-10 transition-transform duration-300 hover:scale-110"
-              />
+              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110">
+                <img
+                  src="https://img.icons8.com/ios-filled/50/ffffff/banana.png"
+                  alt="Logo"
+                  className="w-6 h-6"
+                />
+              </div>
               <span className="text-2xl font-bold text-primary hover:text-secondary transition-colors">
                 BananaLeaf
               </span>
@@ -29,9 +30,11 @@ const Navbar = () => {
           <div className="hidden md:flex space-x-6 items-center">
             <NavLink
               to="/"
-              className={({ isActive }) => 
+              className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                  isActive ? 'text-primary font-bold' : 'text-gray-700 hover:text-primary'
+                  isActive
+                    ? "text-primary font-bold"
+                    : "text-gray-700 hover:text-primary"
                 }`
               }
             >
@@ -39,19 +42,35 @@ const Navbar = () => {
             </NavLink>
             <NavLink
               to="/about"
-              className={({ isActive }) => 
+              className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                  isActive ? 'text-primary font-bold' : 'text-gray-700 hover:text-primary'
+                  isActive
+                    ? "text-primary font-bold"
+                    : "text-gray-700 hover:text-primary"
                 }`
               }
             >
               About
             </NavLink>
             <NavLink
-              to="/services"
-              className={({ isActive }) => 
+              to="/products"
+              className={({ isActive }) =>
                 `px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
-                  isActive ? 'text-primary font-bold' : 'text-gray-700 hover:text-primary'
+                  isActive
+                    ? "text-primary font-bold"
+                    : "text-gray-700 hover:text-primary"
+                }`
+              }
+            >
+              Products
+            </NavLink>
+            <NavLink
+              to="/services"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 ${
+                  isActive
+                    ? "text-primary font-bold"
+                    : "text-gray-700 hover:text-primary"
                 }`
               }
             >
@@ -59,11 +78,11 @@ const Navbar = () => {
             </NavLink>
             <NavLink
               to="/contact"
-              className={({ isActive }) => 
+              className={({ isActive }) =>
                 `px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                  isActive 
-                    ? 'bg-primary text-white shadow-lg' 
-                    : 'bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-primary shadow-lg hover:shadow-xl'
+                  isActive
+                    ? "bg-primary text-white shadow-lg"
+                    : "bg-primary hover:bg-primary/90 text-white shadow-lg hover:shadow-xl"
                 }`
               }
             >
@@ -79,7 +98,7 @@ const Navbar = () => {
             >
               <svg
                 className="h-8 w-8 transform transition-transform duration-300"
-                style={{ transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)' }}
+                style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
                 stroke="currentColor"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -106,15 +125,19 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden bg-white/95 backdrop-blur-sm overflow-hidden transition-all duration-500 ${
-        isOpen ? 'max-h-96' : 'max-h-0'
-      }`}>
+      <div
+        className={`md:hidden bg-white/95 backdrop-blur-sm overflow-hidden transition-all duration-500 ${
+          isOpen ? "max-h-96" : "max-h-0"
+        }`}
+      >
         <div className="px-4 pt-2 pb-3 space-y-1">
           <NavLink
             to="/"
-            className={({ isActive }) => 
+            className={({ isActive }) =>
               `block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                isActive ? 'text-primary font-bold' : 'text-gray-700 hover:text-primary'
+                isActive
+                  ? "text-primary font-bold"
+                  : "text-gray-700 hover:text-primary"
               }`
             }
             onClick={() => setIsOpen(false)}
@@ -123,9 +146,11 @@ const Navbar = () => {
           </NavLink>
           <NavLink
             to="/about"
-            className={({ isActive }) => 
+            className={({ isActive }) =>
               `block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                isActive ? 'text-primary font-bold' : 'text-gray-700 hover:text-primary'
+                isActive
+                  ? "text-primary font-bold"
+                  : "text-gray-700 hover:text-primary"
               }`
             }
             onClick={() => setIsOpen(false)}
@@ -133,10 +158,26 @@ const Navbar = () => {
             About
           </NavLink>
           <NavLink
-            to="/services"
-            className={({ isActive }) => 
+            to="/products"
+            className={({ isActive }) =>
               `block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                isActive ? 'text-primary font-bold' : 'text-gray-700 hover:text-primary'
+                isActive
+                  ? "text-primary font-bold"
+                  : "text-gray-700 hover:text-primary"
+              }`
+            }
+            onClick={() => setIsOpen(false)}
+          >
+            Products
+          </NavLink>
+          {/* Add missing Services link in mobile menu */}
+          <NavLink
+            to="/services"
+            className={({ isActive }) =>
+              `block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+                isActive
+                  ? "text-primary font-bold"
+                  : "text-gray-700 hover:text-primary"
               }`
             }
             onClick={() => setIsOpen(false)}
@@ -145,11 +186,11 @@ const Navbar = () => {
           </NavLink>
           <NavLink
             to="/contact"
-            className={({ isActive }) => 
+            className={({ isActive }) =>
               `block px-4 py-2 rounded-md text-base font-medium transition-all duration-300 ${
-                isActive 
-                  ? 'bg-primary text-white' 
-                  : 'bg-gradient-to-r from-primary to-secondary text-white hover:from-secondary hover:to-primary'
+                isActive
+                  ? "bg-primary text-white"
+                  : "bg-primary/90 hover:bg-primary text-white"
               }`
             }
             onClick={() => setIsOpen(false)}
